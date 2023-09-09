@@ -24,4 +24,4 @@ registry rpc admin update-project \
 
 registry config set registry.project catalog
 
-registry apply -f manifest.yaml
+registry apply -f ./catalog/manifest.yaml

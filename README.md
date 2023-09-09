@@ -5,15 +5,46 @@ This repository contains Helm charts for the
 
 ## Charts
 
-The [charts](/charts) directory contains Helm charts for the core services of an
-API Registry.
+The [charts/core](/charts/core) directory contains Helm charts for the core
+services of an API Registry.
 
-- [registry-server](/charts/core/registry-server) installs the Registry API gRPC
-  service.
+- [registry-server](/charts/core/registry-server) installs the Registry API
+  gRPC service.
+- [registry-gateway](/charts/core/registry-gateway) installs an Envoy proxy
+  that provides transcoded HTTP and gRPC Web services.
+- [registry-controller](/charts/core/registry-controller) installs a cron job
+  that runs the Registry Controller.
+- [registry-viewer](/charts/core/registry-viewer) installs the Registry Viewer.
+
+The [charts/importers](/charts/importers) directory contains Helm charts for
+cron jobs that import information into the registry.
+
+- [import-kubernetes](/charts/importers/import-kubernetes) imports Kubernetes
+  APIs.
+- [import-wordnik](/charts/importers/import-wordnik) imports the Wordnik API.
+
+The [charts/jobs](/charts/jobs) directory contains Helm charts for cron jobs
+that maintain information in the registry.
+
+- [compute-summary-apis](/charts/jobs/compute-summary-apis) computes summary
+  information about APIs.
+- [compute-summary-project](/charts/jobs/compute-summary-project) computes a
+  project-level summary.
 
 ## Installation
 
 Users familiar with Helm can install these charts directly.
+
+The [standalone](/standalone) directory contains scripts that create and manage
+a standalone installation of the entire toolset.
+
+The [catalog](/catalog) directory contains a script that can be used to create
+a Registry project named "catalog".
+
+Note that all scripts should be run from the root of the repo, e.g.
+```
+./standalone/setup.sh
+```
 
 ## Exploration
 
