@@ -89,15 +89,15 @@ Quoting the `bitnami/postgresql` installation notes:
 > PostgreSQL can be accessed via port 5432 on the following DNS names from
 > within your cluster:
 
-    data-postgresql.registry.svc.cluster.local - Read/Write connection
+    data-postgresql.apis.svc.cluster.local - Read/Write connection
 
 > To get the password for "postgres" run:
 
-    export POSTGRES_PASSWORD=$(kubectl get secret --namespace registry data-postgresql -o jsonpath="{.data.postgres-password}" | base64 -d)
+    export POSTGRES_PASSWORD=$(kubectl get secret --namespace apis data-postgresql -o jsonpath="{.data.postgres-password}" | base64 -d)
 
 > To connect to your database run the following command:
 
-    kubectl run data-postgresql-client --rm --tty -i --restart='Never' --namespace registry --image docker.io/bitnami/postgresql:15.2.0-debian-11-r14 --env="PGPASSWORD=$POSTGRES_PASSWORD" \
+    kubectl run data-postgresql-client --rm --tty -i --restart='Never' --namespace apis --image docker.io/bitnami/postgresql:15.2.0-debian-11-r14 --env="PGPASSWORD=$POSTGRES_PASSWORD" \
       --command -- psql --host data-postgresql -U postgres -d postgres -p 5432
 
 > NOTE: If you access the container using bash, make sure that you execute
@@ -107,7 +107,7 @@ Quoting the `bitnami/postgresql` installation notes:
 > To connect to your database from outside the cluster execute the following
 > commands:
 
-    kubectl port-forward --namespace registry svc/data-postgresql 5432:5432 &
+    kubectl port-forward --namespace apis svc/data-postgresql 5432:5432 &
     PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
 
 > WARNING: The configured password will be ignored on new installation in case
