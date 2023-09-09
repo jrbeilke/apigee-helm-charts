@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name:  {{ include "registry.fullname" . }}
+spec:
+  schedule: "30 0/2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            env:
+            - name: REGISTRY_ADDRESS
+              value: {{ .Values.registry.host }}:{{ .Values.registry.port }}
+            - name: REGISTRY_INSECURE
+              value: "true"
+            - name: REGISTRY_PROJECT
+              value: {{ .Values.registry.project }}
+            - name: REGISTRY_LOCATION
+              value: global
+            command:
+            - ./RUN.sh
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/arch: amd64

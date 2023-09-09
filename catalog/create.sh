@@ -1,4 +1,6 @@
-# Copyright 2023 Google LLC. All Rights Reserved.
+#!/bin/bash
+#
+# Copyright 2023 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,19 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "registry.fullname" . }}
-  labels:
-    {{- include "registry.labels" . | nindent 4 }}
-spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 8080
-      protocol: TCP
-      name: http
-  selector:
-    {{- include "registry.selectorLabels" . | nindent 4 }}
+registry rpc admin update-project \
+	--project.name projects/catalog \
+	--project.display_name "API Catalog" \
+	--project.description "APIs collected from a variety of sources." \
+	--allow_missing \
+	>& /dev/null
+
+registry config set registry.project catalog
+
+registry apply -f manifest.yaml

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry
+data:
+  registry-server.yaml: |
+    port: 8080
+    database:
+      driver: {{ .Values.database.driver }}
+      config: host={{ .Values.database.config.host }} port={{ .Values.database.config.port }} user={{ .Values.database.config.user }} dbname={{ .Values.database.config.dbname }} password={{ .Values.database.config.password }} sslmode={{ .Values.database.config.sslmode }}
+    logging:
+      level: {{ .Values.logging }}
+    pubsub:
+      enable: false
+      project: ""

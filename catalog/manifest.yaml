@@ -1,0 +1,12 @@
+apiVersion: apigeeregistry/v1
+kind: Manifest
+metadata:
+  name: manifest
+data:
+  displayName: manifest
+  description: "A simple starter manifest"
+  generatedResources:
+    - pattern: apis/-/versions/-/specs/-/artifacts/complexity
+      dependencies:
+        - pattern: $resource.spec
+      action: registry compute complexity $resource.spec

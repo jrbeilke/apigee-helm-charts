@@ -1,0 +1,1 @@
+This runs the core server for the Registry API.

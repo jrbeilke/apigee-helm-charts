@@ -1,4 +1,6 @@
-# Copyright 2023 Google LLC. All Rights Reserved.
+#!/bin/bash
+#
+# Copyright 2023 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,19 +13,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-apiVersion: v1
-kind: Pod
-metadata:
-  name: "{{ include "registry.fullname" . }}-test-connection"
-  labels:
-    {{- include "registry.labels" . | nindent 4 }}
-  annotations:
-    "helm.sh/hook": test
-spec:
-  containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['{{ include "registry.fullname" . }}:{{ .Values.service.port }}']
-  restartPolicy: Never
+NAMESPACE="${NAMESPACE:-apis}"
+
+# Upgrade core components.
+helm upgrade -n ${NAMESPACE} registry-server charts/core/registry-server
+helm upgrade -n ${NAMESPACE} registry-controller charts/core/registry-controller
+helm upgrade -n ${NAMESPACE} registry-viewer charts/core/registry-viewer
+helm upgrade -n ${NAMESPACE} registry-gateway charts/core/registry-gateway

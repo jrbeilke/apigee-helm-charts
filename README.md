@@ -8,7 +8,7 @@ This repository contains Helm charts for the
 The [charts](/charts) directory contains Helm charts for the core services of an
 API Registry.
 
-- [registry-server](/charts/registry-server) installs the Registry API gRPC
+- [registry-server](/charts/core/registry-server) installs the Registry API gRPC
   service.
 
 ## Installation

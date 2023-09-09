@@ -1,4 +1,6 @@
-# Copyright 2023 Google LLC. All Rights Reserved.
+#!/bin/bash
+#
+# Copyright 2023 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,15 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-apiVersion: v2
-name: registry-server
-description: The Apigee Registry API server.
+NAMESPACE="${NAMESPACE:-apis}"
 
-type: application
+kubectl -n $NAMESPACE \
+  run shell -it \
+  --image ghcr.io/apigee-apihub-demo/registry-kit:latest \
+  --env="REGISTRY_ADDRESS=registry-server.${NAMESPACE}.svc.cluster.local:80" \
+  --env="REGISTRY_INSECURE=true" \
+  --env="REGISTRY_LOCATION=global" \
+  --env="REGISTRY_PROJECT=catalog" \
+  -- \
+  /bin/bash
 
-# The chart version.
-version: 0.1.0
-
-# The version number of the application being deployed.
-appVersion: "v0.6.10"

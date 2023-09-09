@@ -1,0 +1,33 @@
+# Default values for registry.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/apigee-apihub-demo/import-wordnik-apis
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+imagePullSecrets:
+  - name: ghcr-login-secret
+
+nameOverride: ""
+fullnameOverride: ""
+
+registry:
+  host: registry-server.registry-de.svc.cluster.local
+  port: 80
+  project: catalog
+
+podAnnotations: {}
+
+autoscaling:
+  enabled: false
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
