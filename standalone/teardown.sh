@@ -24,6 +24,7 @@ helm uninstall -n ${NAMESPACE} compute-summary-apis
 # Uninstall importers.
 helm uninstall -n ${NAMESPACE} import-kubernetes
 helm uninstall -n ${NAMESPACE} import-wordnik
+helm uninstall -n ${NAMESPACE} import-google
 
 # Uninstall core components.
 helm uninstall -n ${NAMESPACE} registry-controller

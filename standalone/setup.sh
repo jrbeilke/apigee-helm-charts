@@ -46,6 +46,8 @@ helm install -n $NAMESPACE import-kubernetes charts/importers/import-kubernetes 
   --set "registry.host=registry-server.${NAMESPACE}.svc.cluster.local"
 helm install -n $NAMESPACE import-wordnik charts/importers/import-wordnik \
   --set registry.host=registry-server.${NAMESPACE}.svc.cluster.local
+helm install -n $NAMESPACE import-google charts/importers/import-google \
+  --set registry.host=registry-server.${NAMESPACE}.svc.cluster.local
 
 # Install workers.
 helm install -n $NAMESPACE compute-summary-project charts/jobs/compute-summary-project \
