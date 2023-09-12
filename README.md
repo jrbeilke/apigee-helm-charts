@@ -22,6 +22,7 @@ cron jobs that import information into the registry.
 - [import-kubernetes](/charts/importers/import-kubernetes) imports Kubernetes
   APIs.
 - [import-wordnik](/charts/importers/import-wordnik) imports the Wordnik API.
+- [import-google](/charts/importers/import-google) imports Protocol Buffer descriptions of Google APIs.
 
 The [charts/jobs](/charts/jobs) directory contains Helm charts for cron jobs
 that maintain information in the registry.
