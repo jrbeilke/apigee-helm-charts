@@ -28,6 +28,7 @@ fi
 kubectl create namespace $NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
 
 # Install core components.
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install -n $NAMESPACE data bitnami/postgresql
 helm install -n $NAMESPACE registry-server charts/core/registry-server \
   --set "database.config.host=data-postgresql.${NAMESPACE}.svc.cluster.local"
@@ -53,4 +54,7 @@ helm install -n $NAMESPACE import-google charts/importers/import-google \
 helm install -n $NAMESPACE compute-summary-project charts/jobs/compute-summary-project \
   --set "registry.host=registry-server.${NAMESPACE}.svc.cluster.local"
 helm install -n $NAMESPACE compute-summary-apis charts/jobs/compute-summary-apis \
+  --set "registry.host=registry-server.${NAMESPACE}.svc.cluster.local"
+helm install -n $NAMESPACE registrykit-controller charts/jobs/registrykit-controller \
+  --set registry.project=catalog \
   --set "registry.host=registry-server.${NAMESPACE}.svc.cluster.local"

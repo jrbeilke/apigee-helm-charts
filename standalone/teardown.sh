@@ -20,6 +20,7 @@ NAMESPACE="${NAMESPACE:-apis}"
 # Uninstall workers.
 helm uninstall -n ${NAMESPACE} compute-summary-project
 helm uninstall -n ${NAMESPACE} compute-summary-apis
+helm uninstall -n ${NAMESPACE} registrykit-controller
 
 # Uninstall importers.
 helm uninstall -n ${NAMESPACE} import-kubernetes

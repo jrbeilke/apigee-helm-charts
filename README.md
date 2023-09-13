@@ -31,6 +31,8 @@ that maintain information in the registry.
   information about APIs.
 - [compute-summary-project](/charts/jobs/compute-summary-project) computes a
   project-level summary.
+- [registrykit-controller](/charts/jobs/registrykit-controller) installs a cron job
+  that runs the Registry Controller in a custom container that contains additional API tools.
 
 ## Installation
 
