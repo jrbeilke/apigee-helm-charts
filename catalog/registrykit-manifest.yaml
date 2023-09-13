@@ -1,0 +1,10 @@
+apiVersion: apigeeregistry/v1
+kind: Manifest
+metadata:
+  name: registrykit-manifest
+data:
+  generated_resources:
+  - pattern: "apis/-/versions/-/specs/generated"
+    dependencies:
+    - pattern: "$resource.version/specs/protos"
+    action: "registry-experimental generate openapi $resource.version/specs/protos"
