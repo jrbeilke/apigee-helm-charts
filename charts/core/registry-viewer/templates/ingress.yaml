@@ -3,7 +3,11 @@ kind: Ingress
 metadata:
   name: viewer
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    {{- if .Values.ingress.annotations }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
 spec:
   tls:
   - hosts:
